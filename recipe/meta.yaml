@@ -38,5 +38,5 @@ about:
   summary: Collection of persistent (disk-based) queues
   description: |
     Queuelib goals are speed and simplicity.
-  doc_url: https://pypi.python.org/pypi/queuelib
+  doc_url: https://github.com/scrapy/queuelib
   dev_url: https://github.com/scrapy/queuelib
