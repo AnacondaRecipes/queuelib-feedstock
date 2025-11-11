@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/queuelib-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 582bc65514481100b0539bd671da6b355b878869cfc77d92c63b75fcc9cf8e27
 
 build:
@@ -25,17 +25,24 @@ requirements:
 test:
   imports:
     - queuelib
-  commands:
-    - pip check
+    - queuelib.pqueue
+    - queuelib.queue
+    - queuelib.rrqueue
+    - queuelib.tests
   requires:
     - pip
+    - pytest
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -ra -v --tb=short --pyargs queuelib
 
 about:
   home: https://github.com/scrapy/queuelib
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: Collection of persistent (disk-based) queues
+  summary: Collection of persistent (disk-based) and non-persistent (memory-based) queues
   description: |
     Queuelib goals are speed and simplicity.
   doc_url: https://github.com/scrapy/queuelib
